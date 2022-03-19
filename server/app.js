@@ -8,6 +8,7 @@ const errorMiddleware = require("./middleware/error");
 
 // Imports from routes directory
 const user = require("./routes/user.routes");
+const provider = require("./routes/provider.routes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 // Use Routes
 app.use("/v1", user);
+app.use("/v1", provider);
 
 // Middleware for errors
 app.use(errorMiddleware);

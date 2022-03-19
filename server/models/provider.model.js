@@ -17,7 +17,7 @@ const phones = {
   "en-IN": /^(\+?91|0)?[6789]\d{9}$/,
 };
 
-const ownerSchema = mongoose.Schema({
+const providerSchema = mongoose.Schema({
   nameRest: {
     type: String,
     required: [true, "Please enter restaurant "],
@@ -35,7 +35,6 @@ const ownerSchema = mongoose.Schema({
   contactNumber: {
     type: String,
     required: [true, "Please enter mobile number"],
-    validate: [validator.isMobilePhone(), "Please enter valid number"],
     unique: true,
   },
   city: {
@@ -46,24 +45,23 @@ const ownerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  outlet: {
-    outlettype: [
-      {
+  outlet: [
+    {
+      outletType: {
         type: String,
         required: true,
       },
-    ],
-    // validate: [arrayLimit(), "${PATH} exceeds the limit of 2"],
-  },
-  cuisines: {
-    mealtype: [
-      {
+    },
+    // validate: [arrayLimit(this.length()), "${PATH} exceeds the limit of 2"],
+  ],
+  cuisines: [
+    {
+      mealType: {
         type: String,
         required: true,
       },
-    ],
-    // validate: [arrayLimit, " exceeds the limit of 2"],
-  },
+    },
+  ],
   images: [
     {
       url: {
@@ -87,24 +85,25 @@ const ownerSchema = mongoose.Schema({
         ],
       },
     ],
-    // validate: [Days, "Restaurant should work minimum 1 day "],
+    // validate: [Days(this.length), "Restaurant should work minimum 1 day "],
   },
-  role: {
+  ownRole: {
     type: String,
-    default: "owner",
+    default: "provider",
   },
-  //   user: {
-  //     type: mongoose.Schema.ObjectId,
-  //     ref: "user",
-  //     required: true,
-  //   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "user",
+    required: true,
+  },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 });
 
-module.exports = mongoose.model("owner", ownerSchema);
+module.exports = mongoose.model("provider", providerSchema);
+
 // Bakery, Dhaba, Mess, Quick Bites, Food Truck,
 //
 //
