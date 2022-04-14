@@ -40,7 +40,7 @@ exports.getRestProvidersDetails = catchAsyncError(async (req, res, next) => {
   req.body.user = req.user.id;
 
   const provider = await Provider.findOne({ user: req.body.user });
-
+  console.log(provider.ownRole);
   res.status(200).send({
     success: true,
     provider,

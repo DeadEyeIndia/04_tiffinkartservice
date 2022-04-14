@@ -36,11 +36,8 @@ isAuthorizedRole = (...roles) => {
 
 isRestProvider = (...roles) => {
   return (req, res, next) => {
-    const restProvider = Provider.findById(req.user);
     if (!roles.includes("provider")) {
-      return next(
-        new ErrorHandler(`Roles: provider is not allowed to access`, 403)
-      );
+      return next(new ErrorHandler(`You are not allowed to access`, 403));
     }
 
     next();

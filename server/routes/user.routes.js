@@ -31,11 +31,7 @@ router.route("/login").post(loginUser);
 // Get User Details - POST
 router
   .route("/me/details")
-  .get(
-    isAuthenticatedUser,
-    isAuthorizedRole("user", "provider", "admin"),
-    getUserDetails
-  );
+  .get(isAuthenticatedUser, isAuthorizedRole("user", "admin"), getUserDetails);
 
 // After login change password - PUT
 router
@@ -70,10 +66,6 @@ router
 // Logout User - GET - ALL
 router
   .route("/logout")
-  .get(
-    isAuthenticatedUser,
-    isAuthorizedRole("user", "provider", "admin"),
-    logout
-  );
+  .get(isAuthenticatedUser, isAuthorizedRole("user", "admin"), logout);
 
 module.exports = router;
