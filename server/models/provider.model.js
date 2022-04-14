@@ -18,6 +18,13 @@ const phones = {
 };
 
 const providerSchema = mongoose.Schema({
+  name: {
+    type: String,
+    trim: true,
+  },
+  email: {
+    type: String,
+  },
   nameRest: {
     type: String,
     required: [true, "Please enter restaurant "],

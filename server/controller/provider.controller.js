@@ -1,13 +1,15 @@
 const validator = require("validator");
-const Provider = require("../models/provider.model");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
+const Provider = require("../models/provider.model");
 
 // Create a tiffin service -- Provider
 exports.registerProvider = catchAsyncError(async (req, res, next) => {
   req.body.user = req.user.id;
 
   const newProvider = {
+    name: req.user.name,
+    email: req.user.email,
     nameRest: req.body.nameRest,
     addressRest: req.body.addressRest,
     restLocality: req.body.restLocality,
@@ -29,6 +31,17 @@ exports.registerProvider = catchAsyncError(async (req, res, next) => {
   const provider = await Provider.create(newProvider);
 
   res.status(201).send({
+    success: true,
+    provider,
+  });
+});
+
+exports.getRestProvidersDetails = catchAsyncError(async (req, res, next) => {
+  req.body.user = req.user.id;
+
+  const provider = await Provider.findOne({ user: req.body.user });
+
+  res.status(200).send({
     success: true,
     provider,
   });

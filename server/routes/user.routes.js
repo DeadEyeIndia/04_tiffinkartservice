@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 // Import Authenticated from auth.js
-const { isAuthenticatedUser } = require("../middleware/auth.js");
+const {
+  isAuthenticatedUser,
+  isAuthorizedRole,
+} = require("../middleware/auth.js");
 
 // Imports from controller directory
 const {
@@ -26,27 +29,51 @@ router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 
 // Get User Details - POST
-router.route("/me/details").get(isAuthenticatedUser, getUserDetails);
+router
+  .route("/me/details")
+  .get(
+    isAuthenticatedUser,
+    isAuthorizedRole("user", "provider", "admin"),
+    getUserDetails
+  );
 
 // After login change password - PUT
-router.route("/change/password").put(isAuthenticatedUser, updatePassword);
+router
+  .route("/change/password")
+  .put(isAuthenticatedUser, isAuthorizedRole("user"), updatePassword);
 
 // After login change user details - PUT
-router.route("/me/change/details").put(isAuthenticatedUser, updateProfile);
+router
+  .route("/me/change/details")
+  .put(isAuthenticatedUser, isAuthorizedRole("user"), updateProfile);
 
 // All User -- ADMIN
-router.route("/admin/allusers").get(isAuthenticatedUser, getAllUser);
+router
+  .route("/admin/allusers")
+  .get(isAuthenticatedUser, isAuthorizedRole("admin"), getAllUser);
 
 // Single User -- ADMIN
-router.route("/admin/single/user/:id").get(isAuthenticatedUser, singleUser);
+router
+  .route("/admin/single/user/:id")
+  .get(isAuthenticatedUser, isAuthorizedRole("admin"), singleUser);
 
 // Update User role -- ADMIN
-router.route("/admin/user/role/:id").put(isAuthenticatedUser, updateUserRole);
+router
+  .route("/admin/user/role/:id")
+  .put(isAuthenticatedUser, isAuthorizedRole("admin"), updateUserRole);
 
 // Delete a user -- ADMIN
-router.route("/admin/delete/user/:id").delete(isAuthenticatedUser, deleteUser);
+router
+  .route("/admin/delete/user/:id")
+  .delete(isAuthenticatedUser, isAuthorizedRole("admin"), deleteUser);
 
 // Logout User - GET - ALL
-router.route("/logout").get(isAuthenticatedUser, logout);
+router
+  .route("/logout")
+  .get(
+    isAuthenticatedUser,
+    isAuthorizedRole("user", "provider", "admin"),
+    logout
+  );
 
 module.exports = router;
