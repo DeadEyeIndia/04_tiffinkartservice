@@ -1,22 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-function arrayLimit(val) {
-  return val.length <= 10;
-}
-
-function Days(val) {
-  if (val.length < 1) {
-    return val.length < 1;
-  } else if (val.length > 7) {
-    return val.length > 7;
-  }
-}
-
-const phones = {
-  "en-IN": /^(\+?91|0)?[6789]\d{9}$/,
-};
-
 const providerSchema = mongoose.Schema({
   name: {
     type: String,
@@ -24,6 +8,8 @@ const providerSchema = mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
+    trim: true,
   },
   nameRest: {
     type: String,
@@ -59,7 +45,6 @@ const providerSchema = mongoose.Schema({
         required: true,
       },
     },
-    // validate: [arrayLimit(this.length()), "${PATH} exceeds the limit of 2"],
   ],
   cuisines: [
     {
@@ -77,23 +62,19 @@ const providerSchema = mongoose.Schema({
       },
     },
   ],
-  workDays: {
-    days: [
-      {
-        type: String,
-        enum: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-      },
-    ],
-    // validate: [Days(this.length), "Restaurant should work minimum 1 day "],
-  },
+  workDays: [
+    {
+      type: String,
+      enum: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+    },
+  ],
   ownRole: {
     type: String,
     default: "provider",

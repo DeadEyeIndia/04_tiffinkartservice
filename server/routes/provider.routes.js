@@ -12,6 +12,7 @@ const {
 const {
   registerProvider,
   getRestProvidersDetails,
+  updateRestProviderDetails,
 } = require("../controller/provider.controller");
 
 // Provider Route API's
@@ -25,6 +26,14 @@ router
     isAuthenticatedUser,
     isRestProvider("provider"),
     getRestProvidersDetails
+  );
+
+router
+  .route("/user/restaurant/update")
+  .put(
+    isAuthenticatedUser,
+    isRestProvider("provider"),
+    updateRestProviderDetails
   );
 
 module.exports = router;

@@ -46,3 +46,41 @@ exports.getRestProvidersDetails = catchAsyncError(async (req, res, next) => {
     provider,
   });
 });
+
+exports.updateRestProviderDetails = catchAsyncError(async (req, res, next) => {
+  req.body.user = req.user.id;
+
+  const newRestProvider = {
+    name: req.user.name,
+    email: req.user.email,
+    nameRest: req.body.nameRest,
+    addressRest: req.body.addressRest,
+    restLocality: req.body.restLocality,
+    contactNumber: req.body.contactNumber,
+    city: req.body.city,
+    state: req.body.state,
+    outlet: req.body.outlet,
+    cuisines: req.body.cuisines,
+    images: req.body.images,
+    workDays: req.body.workDays,
+  };
+
+  if (!validator.isMobilePhone(newRestProvider.contactNumber, "en-IN")) {
+    return next(new ErrorHandler("Please enter valid mobile number", 401));
+  }
+
+  const provider = await Provider.findOneAndUpdate(
+    req.body.user,
+    newRestProvider,
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  res.status(200).send({
+    success: true,
+    provider,
+  });
+});
