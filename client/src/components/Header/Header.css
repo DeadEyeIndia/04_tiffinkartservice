@@ -1,0 +1,28 @@
+.header {
+  height: 90px;
+  padding: 0 150px;
+}
+
+/* @media screen and (max-width: 760px) {
+  .header {
+  }
+} */
+
+.header__title-login {
+  height: 100%;
+}
+
+.header__addRest {
+  text-decoration: none;
+  color: black;
+}
+
+.header__loginArea > div {
+  cursor: pointer;
+}
+
+.header__login {
+  margin-right: 50px;
+  text-decoration: none;
+  color: black;
+}

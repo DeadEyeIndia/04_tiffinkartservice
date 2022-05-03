@@ -1,0 +1,60 @@
+.search {
+  height: 50vh;
+  width: 100%;
+  position: relative;
+}
+.search__img {
+  height: 100%;
+  background-image: url("../../images/tiffin.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.search__appTitle {
+  width: 100%;
+  position: absolute;
+  flex-direction: column;
+  top: 0;
+  margin-top: 120px;
+  color: #ffffff;
+}
+
+.search__appTitle > h1 {
+  margin-bottom: 40px;
+  font-size: 75px;
+}
+
+.search__inputBoxes {
+  width: 35%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.search__locationInput > svg {
+  color: black;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.search__addressInput > input,
+.search__locationInput > input {
+  height: 100%;
+  margin-left: 6px;
+  font-size: 16px;
+}
+
+.search__locationInput > input::placeholder {
+  color: grey;
+  font-size: 16px;
+}
+
+.search__addressInput {
+  width: 100%;
+}
+
+.search__break {
+  height: 100%;
+  border-left: 1px solid black;
+}

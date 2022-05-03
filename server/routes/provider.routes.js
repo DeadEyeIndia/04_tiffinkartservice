@@ -43,7 +43,7 @@ router
 
 router
   .route("/user/all/tiffin-services")
-  .get(isAuthenticatedUser, isAuthorizedRole("user"), getAllTiffinServices);
+  .get(isAuthenticatedUser, getAllTiffinServices);
 
 // ADMIN -- routes
 router
@@ -67,3 +67,5 @@ router
   );
 
 module.exports = router;
+
+// , isAuthorizedRole("user")
