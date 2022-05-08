@@ -1,39 +1,59 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
+import { Link } from "react-router-dom";
 
 import "./HomeScreen.css";
 import Header from "../../components/Header/Header";
 import Search from "../../components/Search/Search";
+import Loader from "../../components/Loader/Loader";
+import { getProviders, clearErrors } from "../../actions/providerAction";
+import MetaData from "../../components/MetaData";
 
 const HomeScreen = () => {
-  // const { provider } = useSelector((state) => state.provider);
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const { error, loading, providers } = useSelector((state) => state.provider);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
-  // console.log(provider);
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
 
+    dispatch(getProviders());
+  }, [dispatch, alert, error]);
   return (
     <>
-      <Header />
-      <Search />
+      {loading ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          <MetaData title="Tiffin Kart" />
+          <Header />
+
+          <Search />
+          <div className="app__providersList">
+            {providers &&
+              providers.map((provider) => (
+                <div key={provider._id} className="app__tiffinProviders">
+                  <h3>Tiffin Wala: {provider.nameRest}</h3>
+                  <p>Contact: {provider.contactNumber}</p>
+                  <p>Tiffin type: {provider.tiffinType}</p>
+                  <img src={provider.images[0].url} alt="" />
+                  <p>Category: {provider.category}</p>
+                  <p>Service: {provider.service}</p>
+                  <p>City: {provider.city}</p>
+                </div>
+              ))}
+          </div>
+        </>
+      )}
     </>
   );
 };
 
 export default HomeScreen;
-
-// const [provs, setProvs] = useState([]);
-// useEffect(() => {
-//   async function fetchData() {
-//     const request = await axios.get("/user/all/tiffin-services");
-//     dispatch(
-//       provider({
-//         result: request,
-//       })
-//     );
-
-//     console.log(request);
-
-//     return request;
-//   }
-
-//   fetchData();
-// }, [dispatch]);

@@ -19,7 +19,12 @@ const {
   singleUser,
   updateUserRole,
   deleteUser,
+  getToken,
 } = require("../controller/user.controller");
+
+// Development use
+
+router.route("/getcookie").get(getToken);
 
 // User Route API's
 // Register User - POST
@@ -64,8 +69,6 @@ router
   .delete(isAuthenticatedUser, isAuthorizedRole("admin"), deleteUser);
 
 // Logout User - GET - ALL
-router
-  .route("/logout")
-  .get(isAuthenticatedUser, isAuthorizedRole("user", "admin"), logout);
+router.route("/logout").get(isAuthenticatedUser, logout);
 
 module.exports = router;

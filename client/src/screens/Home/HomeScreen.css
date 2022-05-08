@@ -1,0 +1,19 @@
+.app__providersList {
+  display: flex;
+
+  margin-top: 1rem;
+  margin-left: 10rem;
+}
+
+.app__tiffinProviders {
+  margin: 1rem 1rem;
+  padding: 1rem;
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 5px;
+}
+
+.app__tiffinProviders > img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}

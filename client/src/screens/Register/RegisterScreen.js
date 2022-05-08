@@ -1,29 +1,111 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "universal-cookie";
 
-import "./Register.css";
+import "./RegisterScreen.css";
+import Loader from "../../components/Loader/Loader";
+import { newRegister, clearErrors } from "../../actions/userAction";
+import MetaData from "../../components/MetaData";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { error, loading, isAuthenticated, token } = useSelector(
+    (state) => state.auth
+  );
+  const cookies = new Cookies();
+  cookies.set("token", token, {
+    expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+    path: "/",
+  });
+
+  const [newUser, setNewUser] = useState({
+    registerName: "",
+    registerEmail: "",
+    registerPassword: "",
+  });
+
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      newRegister(
+        newUser.registerName,
+        newUser.registerEmail,
+        newUser.registerPassword
+      )
+    );
+  };
+
+  useEffect(() => {
+    if (error) {
+      dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [dispatch, error, isAuthenticated, navigate]);
+
   return (
-    <div className="app__createRegister f-c-c">
-      <div className="app__createRegisterInner f-c-c">
-        <h1>Tiffin Service</h1>
-        <h3>Register</h3>
-        <form className="app__registerForm f-c-c">
-          <input type="text" placeholder="Name .." />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <div className="app__signInCreate f-sb-c">
-            <Link to="/login" className="app__signInInstead">
-              Sign In
-            </Link>
-            <button type="submit" className="app__registerButton">
-              Create account
-            </button>
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <MetaData title="Register User" />
+          <div className="app__createRegister f-c-c">
+            <div className="app__createRegisterInner f-c-c">
+              <h1>Tiffin Service</h1>
+              <h3>Register</h3>
+              <form
+                className="app__registerForm f-c-c"
+                onSubmit={handleRegisterSubmit}
+              >
+                <input
+                  type="text"
+                  placeholder="Name .."
+                  name="name"
+                  value={newUser.registerName}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, registerName: e.target.value })
+                  }
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={newUser.registerEmail}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, registerEmail: e.target.value })
+                  }
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={newUser.registerPassword}
+                  onChange={(e) =>
+                    setNewUser({ ...newUser, registerPassword: e.target.value })
+                  }
+                />
+                <div className="app__signInCreate f-sb-c">
+                  <Link to="/login" className="app__signInInstead">
+                    Already have an account
+                  </Link>
+                  <button type="submit" className="app__registerButton">
+                    Create account
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
-      </div>
-    </div>
+        </>
+      )}
+    </>
   );
 };
 

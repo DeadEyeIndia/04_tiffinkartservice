@@ -1,3 +1,5 @@
+const Cookies = require("universal-cookie");
+
 const ErrorHandler = require("../utils/errorHandler");
 const jwt = require("jsonwebtoken");
 const catchAsyncError = require("./catchAsyncError");
@@ -6,6 +8,8 @@ const Provider = require("../models/provider.model");
 
 isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.cookies;
+
+  console.log(token);
 
   if (!token) {
     return next(new ErrorHandler("Please login to access this website", 401));

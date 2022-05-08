@@ -3,6 +3,10 @@ const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const sendToken = require("../utils/jwtToken");
 
+exports.getToken = (req, res) => {
+  res.send(req.cookies);
+};
+
 // User Registation
 exports.registerUser = catchAsyncError(async (req, res, next) => {
   const { name, email, password, role } = req.body;
@@ -14,9 +18,9 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     role,
   });
 
-  console.log(user);
+  // console.log(user);
 
-  sendToken(user, 201, res);
+  sendToken(user, 202, res);
 });
 
 // User Login
@@ -39,7 +43,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
 
-  sendToken(user, 200, res);
+  sendToken(user, 202, res);
 });
 
 // User logout

@@ -1,6 +1,7 @@
 .header {
   height: 90px;
   padding: 0 150px;
+  border-bottom: 1px solid black;
 }
 
 /* @media screen and (max-width: 760px) {
@@ -14,7 +15,19 @@
 
 .header__addRest {
   text-decoration: none;
+  padding: 10px 10px;
   color: black;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.header__addRest:hover {
+  color: white;
+  background: black;
 }
 
 .header__loginArea > div {
@@ -25,4 +38,92 @@
   margin-right: 50px;
   text-decoration: none;
   color: black;
+  padding: 10px 10px;
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.header__login:hover {
+  color: white;
+  background: black;
+}
+
+.app__headerUser_logout {
+  display: flex;
+  align-items: center;
+}
+
+.app__headerProfile {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.app__headerProfileIcon {
+  margin-right: 10px;
+}
+
+.app__headerUser {
+  margin-right: 10px;
+}
+
+.app__headerIcon {
+  position: relative;
+  transition: all 0.5s;
+}
+
+.app__navbarHide {
+  display: none;
+}
+
+.app__navbarShow {
+  width: 195px;
+  position: absolute;
+  z-index: 10;
+  top: 50px;
+  left: -165px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.app__navbarShow > div {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid black;
+  transition: all 0.2s;
+}
+
+.app__navbarShow > div:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.app__navbarShow > div:last-child {
+  border-bottom: 0;
+}
+
+.app__headerLogout {
+  padding: 10px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.app__headerLogout:hover {
+  background: black;
+  color: white;
+  cursor: pointer;
 }

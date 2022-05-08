@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -10,13 +11,11 @@ const errorMiddleware = require("./middleware/error");
 const user = require("./routes/user.routes");
 const provider = require("./routes/provider.routes");
 
-const app = express();
-
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use Routes
 app.use("/v1", user);

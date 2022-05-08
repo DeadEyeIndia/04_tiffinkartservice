@@ -10,62 +10,52 @@ const {
 
 // Import from Provider controller
 const {
-  registerProvider,
-  getRestProvidersDetails,
-  updateRestProviderDetails,
+  // registerProvider,
+  registerTiffinService,
+  getTiffinServiceDetails,
+  updateTiffinServiceDetails,
   getAllTiffinServices,
-  getAllTiffinAdmin,
-  getSingleTiffinAdmin,
-  updateTiffinAdmin,
-  deleteTiffinProviderAdmin,
+  getAllTiffinForAdmin,
+  getSingleTiffinForAdmin,
+  updateTiffinForAdmin,
+  deleteTiffinProviderForAdmin,
 } = require("../controller/provider.controller");
 
 // Provider Route API's
-router
-  .route("/user/tiffin/register")
-  .post(isAuthenticatedUser, isAuthorizedRole("user"), registerProvider);
 
-router
-  .route("/user/restaurant")
-  .get(
-    isAuthenticatedUser,
-    isRestProvider("provider"),
-    getRestProvidersDetails
-  );
+router.route("/user/tiffin/register").post(registerTiffinService);
+
+router.route("/user/restaurant/:user").get(getTiffinServiceDetails);
 
 router
   .route("/user/restaurant/update")
   .put(
     isAuthenticatedUser,
     isRestProvider("provider"),
-    updateRestProviderDetails
+    updateTiffinServiceDetails
   );
 
-router
-  .route("/user/all/tiffin-services")
-  .get(isAuthenticatedUser, getAllTiffinServices);
+router.route("/user/all/tiffin-services").get(getAllTiffinServices);
 
 // ADMIN -- routes
 router
   .route("/admin/allproviders")
-  .get(isAuthenticatedUser, isAuthorizedRole("admin"), getAllTiffinAdmin);
+  .get(isAuthenticatedUser, isAuthorizedRole("admin"), getAllTiffinForAdmin);
 
 router
   .route("/admin/single/provider/:id")
-  .get(isAuthenticatedUser, isAuthorizedRole("admin"), getSingleTiffinAdmin);
+  .get(isAuthenticatedUser, isAuthorizedRole("admin"), getSingleTiffinForAdmin);
 
 router
   .route("/admin/update/provider/:id")
-  .put(isAuthenticatedUser, isAuthorizedRole("admin"), updateTiffinAdmin);
+  .put(isAuthenticatedUser, isAuthorizedRole("admin"), updateTiffinForAdmin);
 
 router
   .route("/admin/delete/provider/:id")
   .delete(
     isAuthenticatedUser,
     isAuthorizedRole("admin"),
-    deleteTiffinProviderAdmin
+    deleteTiffinProviderForAdmin
   );
 
 module.exports = router;
-
-// , isAuthorizedRole("user")

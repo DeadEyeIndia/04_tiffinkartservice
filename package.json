@@ -7,6 +7,7 @@
     "accesscontrol": "^2.2.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "cloudinary": "^1.29.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -18,6 +19,7 @@
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
+    "universal-cookie": "^4.0.4",
     "validator": "^13.7.0"
   },
   "scripts": {
