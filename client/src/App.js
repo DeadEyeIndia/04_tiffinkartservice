@@ -25,9 +25,9 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomeScreen />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/register-restaurant" element={<RegisterRestScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/register-restaurant" element={<RegisterRestScreen />} />
           <Route path="/provider/details" element={<ProviderDetails />} />
           <Route path="/account" element={<User />} />
         </Routes>

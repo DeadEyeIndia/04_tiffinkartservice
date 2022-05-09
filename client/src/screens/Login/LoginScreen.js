@@ -45,30 +45,37 @@ const LoginScreen = () => {
       ) : (
         <>
           <MetaData title="LOGIN -- Tiffin Kart" />
-          <div className="app__login f-c-c">
-            <div className="app__loginInner f-c-c">
-              <h1>Tiffin Service</h1>
+          <div className="app__login">
+            <div className="app__loginBackgroundImage" />
+            <div className="app__loginInner">
+              <h1>Tiffin Kart</h1>
               <h3>Login</h3>
               <form
                 onSubmit={(e) => handleSubmit(e)}
                 className="app-loginForm f-c-c"
               >
-                <input
-                  type="email"
-                  name="email"
-                  value={user.email}
-                  placeholder="Email"
-                  onChange={(e) => setUser({ ...user, email: e.target.value })}
-                />
-                <input
-                  type="password"
-                  name="pwd"
-                  value={user.password}
-                  placeholder="Password"
-                  onChange={(e) =>
-                    setUser({ ...user, password: e.target.value })
-                  }
-                />
+                <div className="app__loginInput">
+                  <input
+                    type="email"
+                    name="email"
+                    value={user.email}
+                    placeholder="Email"
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="app__loginInput">
+                  <input
+                    type="password"
+                    name="pwd"
+                    value={user.password}
+                    placeholder="Password"
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
+                  />
+                </div>
                 <div className="app__loginCreate f-sb-c">
                   <Link to="/register" className="app__register">
                     Create account

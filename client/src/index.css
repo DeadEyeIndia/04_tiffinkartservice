@@ -1,3 +1,7 @@
+:root {
+  --font-color: #1a73e8;
+}
+
 html {
   box-sizing: border-box;
 }

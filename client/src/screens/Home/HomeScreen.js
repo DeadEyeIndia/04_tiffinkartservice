@@ -35,7 +35,7 @@ const HomeScreen = () => {
           <MetaData title="Tiffin Kart" />
           <div className="app__homeScreen">
             <Header />
-
+            {/* <Search /> */}
             <div className="app__providersList">
               {providers &&
                 providers.map((provider) => (

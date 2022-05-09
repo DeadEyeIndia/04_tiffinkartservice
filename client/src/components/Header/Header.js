@@ -16,21 +16,6 @@ const Header = () => {
 
   const [toggleIcon, setToggleIcon] = useState(true);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  };
-
-  // const handleNav = () => {
-  //   navigate("/register-restaurant");
-  // };
-
-  // const showUserDetails = () => {
-  //   navigate("/account");
-  // };
-
   return (
     <header className="header">
       <div className="header__main f-sb-c">
@@ -52,7 +37,7 @@ const Header = () => {
               <Link to="/dashboard" className="app__headerDashboard">
                 Dashboard
               </Link>
-              <div className="app__headerProfile">
+              {/* <div className="app__headerProfile">
                 <PersonIcon
                   className="app__headerProfileIcon"
                   style={{ fontSize: 36 }}
@@ -71,7 +56,7 @@ const Header = () => {
                     Logout
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </>
         )}

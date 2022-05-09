@@ -1,17 +1,25 @@
 .app__login {
   height: 100vh;
   width: 100%;
-  flex-direction: column;
+  display: flex;
 }
 
+.app__loginBackgroundImage {
+  flex: 0.5;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../images/14a0f743bf4ed406ff39d9220cbdf730.jpg");
+}
 .app__loginInner {
+  flex: 0.5;
   position: relative;
-  width: 25%;
-  height: 50%;
-  justify-content: start;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  border: 1px solid #b1b1b1;
-  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.137);
 }
 
 .app__loginInner > h1 {
@@ -29,18 +37,28 @@ form {
   margin-top: 30px;
 }
 
-form > input {
+form > div:first-child {
+  margin-bottom: 20px;
+}
+
+.app__loginInput {
   width: 300px;
   height: 40px;
-  padding: 0 15px;
-  margin-top: 20px;
   border: 1px solid #808080;
-  border-radius: 3px;
+  border-radius: 35px;
+}
+
+form > div > input {
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+  background: transparent;
 }
 
 .app__loginCreate {
   width: 100%;
   margin-top: 30px;
+  border: 0;
 }
 
 .app__register {

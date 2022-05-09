@@ -13,7 +13,7 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const { error, loading, isAuthenticated, token } = useSelector(
-    (state) => state.auth
+    (state) => state.user
   );
   const cookies = new Cookies();
   cookies.set("token", token, {
@@ -59,39 +59,48 @@ const RegisterScreen = () => {
           <MetaData title="Register User" />
           <div className="app__createRegister f-c-c">
             <div className="app__createRegisterInner f-c-c">
-              <h1>Tiffin Service</h1>
+              <h1>Tiffin Kart</h1>
               <h3>Register</h3>
               <form
                 className="app__registerForm f-c-c"
                 onSubmit={handleRegisterSubmit}
               >
-                <input
-                  type="text"
-                  placeholder="Name .."
-                  name="name"
-                  value={newUser.registerName}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, registerName: e.target.value })
-                  }
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  value={newUser.registerEmail}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, registerEmail: e.target.value })
-                  }
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={newUser.registerPassword}
-                  onChange={(e) =>
-                    setNewUser({ ...newUser, registerPassword: e.target.value })
-                  }
-                />
+                <div className="app__registerInput">
+                  <input
+                    type="text"
+                    placeholder="Name .."
+                    name="name"
+                    value={newUser.registerName}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, registerName: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="app__registerInput">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={newUser.registerEmail}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, registerEmail: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="app__registerInput">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={newUser.registerPassword}
+                    onChange={(e) =>
+                      setNewUser({
+                        ...newUser,
+                        registerPassword: e.target.value,
+                      })
+                    }
+                  />
+                </div>
                 <div className="app__signInCreate f-sb-c">
                   <Link to="/login" className="app__signInInstead">
                     Already have an account
@@ -102,6 +111,7 @@ const RegisterScreen = () => {
                 </div>
               </form>
             </div>
+            <div className="app__registerBackgroundImage" />
           </div>
         </>
       )}
