@@ -4,20 +4,35 @@ import { useNavigate } from "react-router-dom";
 
 import "./RegisterRestScreen.css";
 import LoginScreen from "../Login/LoginScreen";
+import ProviderDetails from "../../components/Provider/ProviderDetails";
 import MetaData from "../../components/MetaData";
 import cuisinesData from "./cuisinesData.json";
-import { clearErrors, createProvider } from "../../actions/newProviderAction";
+import {
+  clearErrors,
+  createProvider,
+  getProviderDetails,
+} from "../../actions/providerAction";
+import Loader from "../../components/Loader/Loader";
 
 const RegisterRestScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+  // console.log(user._id);
+
+  const { details } = useSelector((state) => state.providerDetails);
   // const { newLoading, success, errorTiffin } = useSelector(
   //   (state) => state.newTiffin
   // );
 
   // const [tiffinProvider, setTiffinProvider] = useState({});
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getProviderDetails(user._id));
+    }
+  }, [isAuthenticated, dispatch, user._id]);
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -87,10 +102,12 @@ const RegisterRestScreen = () => {
 
   return (
     <>
-      {!isAuthenticated ? (
-        <>
-          <LoginScreen />
-        </>
+      {loading ? (
+        <Loader />
+      ) : !isAuthenticated ? (
+        <LoginScreen />
+      ) : details ? (
+        <ProviderDetails />
       ) : (
         <>
           <MetaData title="Register Provider" />
@@ -199,3 +216,19 @@ const RegisterRestScreen = () => {
 };
 
 export default RegisterRestScreen;
+
+// {
+//   !isAuthenticated ? (
+//     <>
+//       <LoginScreen />
+//     </>
+//   ) : (
+//
+//   );
+// }
+// // if(!isAuthenticated) {<LoginScreen />} else if(details)
+//       {<ProviderDetails />} else
+//       {
+//         <>
+//
+//       }

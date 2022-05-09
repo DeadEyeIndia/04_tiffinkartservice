@@ -33,22 +33,23 @@ const HomeScreen = () => {
       ) : (
         <>
           <MetaData title="Tiffin Kart" />
-          <Header />
+          <div className="app__homeScreen">
+            <Header />
 
-          <Search />
-          <div className="app__providersList">
-            {providers &&
-              providers.map((provider) => (
-                <div key={provider._id} className="app__tiffinProviders">
-                  <h3>Tiffin Wala: {provider.nameRest}</h3>
-                  <p>Contact: {provider.contactNumber}</p>
-                  <p>Tiffin type: {provider.tiffinType}</p>
-                  <img src={provider.images[0].url} alt="" />
-                  <p>Category: {provider.category}</p>
-                  <p>Service: {provider.service}</p>
-                  <p>City: {provider.city}</p>
-                </div>
-              ))}
+            <div className="app__providersList">
+              {providers &&
+                providers.map((provider) => (
+                  <div key={provider._id} className="app__tiffinProviders">
+                    <h3>Tiffin Wala: {provider.nameRest}</h3>
+                    <p>Contact: {provider.contactNumber}</p>
+                    <p>Tiffin type: {provider.tiffinType}</p>
+                    <img src={provider.images[0].url} alt="" />
+                    <p>Category: {provider.category}</p>
+                    <p>Service: {provider.service}</p>
+                    <p>City: {provider.city}</p>
+                  </div>
+                ))}
+            </div>
           </div>
         </>
       )}

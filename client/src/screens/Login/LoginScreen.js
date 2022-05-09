@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
 
 import "./LoginScreen.css";
 import Loader from "../../components/Loader/Loader";
@@ -9,6 +10,7 @@ import MetaData from "../../components/MetaData";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const navigate = useNavigate();
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
@@ -27,6 +29,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 

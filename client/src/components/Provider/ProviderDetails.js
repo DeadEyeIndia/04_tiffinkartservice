@@ -1,38 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 import "./ProviderDetails.css";
-import Loader from "../../components/Loader/Loader";
-import {
-  clearErrors,
-  getProviderDetails,
-} from "../../actions/newProviderAction";
+// import Loader from "../../components/Loader/Loader";
+// import { clearErrors, getProviderDetails } from "../../actions/providerAction";
 import MetaData from "../../components/MetaData";
 
 const ProviderDetails = () => {
-  const dispatch = useDispatch();
+  // console.log(user);
+  const navigate = useNavigate();
 
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.user);
+  const { error, success, details } = useSelector(
+    (state) => state.providerDetails
+  );
 
   useEffect(() => {
-    dispatch(getProviderDetails(user._id));
-  }, [dispatch, user._id]);
+    if (isAuthenticated && success) {
+      navigate("/provider/details");
+    }
+  }, [navigate, isAuthenticated, success]);
 
-  // const {
-  //   nameRest,
-  //   addressRest,
-  //   restLocality,
-  //   contactNumber,
-  //   city,
-  //   state,
-  //   tiffinType,
-  //   cuisines,
-  //   images,
-  //   category,
-  //   service,
-  // } = details;
-
-  return <div className="app__providerDetails">Provider Details</div>;
+  return (
+    <>
+      <div className="app__providerDetails">
+        <h2>{details.provider?.nameRest}</h2>
+      </div>
+    </>
+  );
 };
 
 export default ProviderDetails;

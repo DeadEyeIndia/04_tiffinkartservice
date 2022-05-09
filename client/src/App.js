@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import HomeScreen from "./screens/Home/HomeScreen";
+import Dashboard from "./screens/Dashboard/Dashboard";
 import LoginScreen from "./screens/Login/LoginScreen";
 import RegisterScreen from "./screens/Register/RegisterScreen";
 import RegisterRestScreen from "./screens/RegisterRestaurant/RegisterRestScreen";
@@ -23,6 +24,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<HomeScreen />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/register-restaurant" element={<RegisterRestScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />

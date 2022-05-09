@@ -9,121 +9,102 @@
   }
 } */
 
-.header__title-login {
+.header__main {
   height: 100%;
 }
 
-.header__addRest {
+.app__headerTitle {
   text-decoration: none;
-  padding: 10px 10px;
-  color: black;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: transparent;
-  transition: all 0.2s;
+  color: #000;
 }
 
-.header__addRest:hover {
-  color: white;
-  background: black;
-}
-
-.header__loginArea > div {
-  cursor: pointer;
-}
-
-.header__login {
-  margin-right: 50px;
-  text-decoration: none;
-  color: black;
-  padding: 10px 10px;
-  color: black;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: transparent;
-  transition: all 0.2s;
-}
-
-.header__login:hover {
-  color: white;
-  background: black;
-}
-
-.app__headerUser_logout {
+.app__headerButtons {
   display: flex;
   align-items: center;
+}
+
+.app__headerButtons > a {
+  text-decoration: none;
+  color: black;
+  padding: 10px 10px;
+  border: 1px solid rgb(121, 121, 121);
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.app__headerButtons > a:hover {
+  color: white;
+  background-color: black;
+}
+
+.app__headerSignUp {
+  margin-right: 15px;
+}
+
+.app__headerAfter {
+  display: flex;
+  align-items: center;
+}
+
+.app__headerDashboard {
+  text-decoration: none;
+  color: #000;
+  margin-right: 15px;
+  padding: 10px 10px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.app__headerDashboard:hover {
+  color: #fff;
+  background-color: #000;
 }
 
 .app__headerProfile {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-  cursor: pointer;
+  position: relative;
 }
 
 .app__headerProfileIcon {
-  margin-right: 10px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
-.app__headerUser {
-  margin-right: 10px;
+.app__headerProfileIcon:hover {
+  color: #fff;
+  background-color: #000;
 }
 
-.app__headerIcon {
-  position: relative;
-  transition: all 0.5s;
-}
-
-.app__navbarHide {
+.app__headerToggleHide {
   display: none;
 }
 
-.app__navbarShow {
-  width: 195px;
-  position: absolute;
+.app__headerToggleShow {
+  content: "";
   z-index: 10;
+  width: 130px;
+  position: absolute;
   top: 50px;
-  left: -165px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
+  right: -40px;
+  border: 1px solid #000;
   border-radius: 4px;
   background-color: #fff;
 }
 
-.app__navbarShow > div {
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-  border-bottom: 1px solid black;
-  transition: all 0.2s;
+.app__headerToggleShow > div {
+  padding: 6px 8px;
+  border-bottom: 1px solid #000;
+  transition: all 0.3s;
 }
 
-.app__navbarShow > div:hover {
-  background-color: #000;
+.app__headerToggleShow > div:hover {
   color: #fff;
-}
-
-.app__navbarShow > div:last-child {
-  border-bottom: 0;
-}
-
-.app__headerLogout {
-  padding: 10px 10px;
-  font-size: 16px;
-  font-weight: 600;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: transparent;
-  transition: all 0.2s;
-}
-
-.app__headerLogout:hover {
-  background: black;
-  color: white;
+  background-color: #000;
   cursor: pointer;
+}
+
+.app__headerToggleShow > div:last-child {
+  border-bottom: 0;
 }
