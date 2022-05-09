@@ -98,7 +98,13 @@
 .app__dashboardNoUser {
   height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   /* justify-content: center; */
+}
+
+.app__dashboardLink {
+  color: var(--font-color-hover);
 }
 
 .app__dashboardOverview {
@@ -149,5 +155,19 @@
 }
 
 .app__dashboardLogoutInner:hover {
-  color: var(--font-color);
+  color: var(--font-color-hover);
+}
+
+.app__dashboardMain {
+  padding-left: 4%;
+  width: 100%;
+}
+
+.app__dashboardMain-header {
+  display: flex;
+  align-items: center;
+}
+
+.app__dashboardMain > div > h1 {
+  color: var(--font-color-title);
 }

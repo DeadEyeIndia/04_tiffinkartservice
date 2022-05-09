@@ -8,12 +8,6 @@ const sendToken = (user, statusCode, res) => {
     sameSite: "strict",
   };
 
-  // {
-  //     expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-  //     httpOnly: false,
-  //     secure: true,
-  //   }
-
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
     user,

@@ -16,8 +16,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, user } = useSelector((state) => state.user);
-  const { loading, details } = useSelector((state) => state.providerDetails);
+  const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+  const { details } = useSelector((state) => state.providerDetails);
 
   const handleHome = () => {
     navigate("/");
@@ -77,8 +77,15 @@ const Dashboard = () => {
                 ) : (
                   <>
                     <div className="app__dashboardNoUser">
-                      If you want to add your tiffin service
-                      <Link to="/register-restaurant">Click here!</Link>
+                      <span>
+                        If you want to add your tiffin service{" "}
+                        <Link
+                          to="/register-restaurant"
+                          className="app__dashboardLink"
+                        >
+                          Click here!
+                        </Link>
+                      </span>
                     </div>
                   </>
                 )}
@@ -94,16 +101,17 @@ const Dashboard = () => {
               </div>
             </div>
             <main className="app__dashboardMain">
-              <h1>Welcome {user.name}!</h1>
-              <nav className="app__dashboardNavInner">
-                <div className="app__dashboardProfileSettings">
-                  Profile Settings
-                </div>
-                <div className="app__dashboardViewProvider">
-                  Provider Details
-                </div>
-                <div className="app__dashboardFeedbacks">Reviews</div>
-              </nav>
+              <div className="app__dashboardMain-header">
+                <h1>Welcome, {user.name}!</h1>
+
+                <select>
+                  <option value="Profile Settings" selected>
+                    Profile Settings
+                  </option>
+                  <option value="Provider Details">Provider Details</option>
+                  <option value="Reviews">Reviews</option>
+                </select>
+              </div>
             </main>
           </div>
         </>

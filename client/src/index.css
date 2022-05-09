@@ -1,5 +1,6 @@
 :root {
-  --font-color: #1a73e8;
+  --font-color-hover: #1a73e8;
+  --font-color-title: #042a4a;
 }
 
 html {

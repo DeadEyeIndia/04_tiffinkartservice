@@ -43,11 +43,6 @@ exports.registerTiffinService = catchAsyncError(async (req, res, next) => {
 exports.getTiffinServiceDetails = catchAsyncError(async (req, res, next) => {
   const provider = await Provider.findOne({ user: req.params.user });
 
-  console.log(provider);
-
-  // const provider = await Provider.findOne({ user: req.body.user });
-
-  // console.log(provider.ownRole);
   res.status(200).send({
     success: true,
     provider,
