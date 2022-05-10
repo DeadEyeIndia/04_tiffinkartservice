@@ -5,7 +5,7 @@ import {
   newProvider,
   getProviderDetails,
 } from "../reducers/providerReducer";
-import userReducer from "../reducers/userReducer";
+import { userReducer, profileReducer } from "../reducers/userReducer";
 // import {
 //   newProvider,
 //   getProviderDetails,
@@ -15,6 +15,7 @@ const reducer = combineReducers({
   provider: providerReducer,
   newProvider: newProvider,
   providerDetails: getProviderDetails,
+  profile: profileReducer,
 });
 
 export const store = configureStore({

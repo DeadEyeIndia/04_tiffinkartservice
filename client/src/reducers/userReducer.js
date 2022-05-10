@@ -1,4 +1,4 @@
-const userReducer = (state = { user: {} }, action) => {
+export const userReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case "LOGIN_REQUEST":
     case "REGISTER_REQUEST":
@@ -62,4 +62,36 @@ const userReducer = (state = { user: {} }, action) => {
   }
 };
 
-export default userReducer;
+export const profileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "UPDATE_PROFILE_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "UPDATE_PROFILE_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+    case "UPDATE_PROFILE_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case "UPDATE_PROFILE_RESET":
+      return {
+        ...state,
+        isUpdated: false,
+      };
+    case "CLEAR_ERROS":
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};

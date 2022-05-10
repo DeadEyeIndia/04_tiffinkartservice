@@ -122,11 +122,15 @@
   flex-direction: column;
 }
 
-.app__dashboardMain > div > h1 {
+.app__dashboardMain-header > h1 {
+  margin-top: 40px;
+  font-weight: 500;
+  font-size: 50px;
   color: var(--font-color-title);
 }
 
 .app__dashboardMain_navLink {
+  margin: 30px 0 20px 0;
   display: flex;
 }
 

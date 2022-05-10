@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PhoneIcon from "@mui/icons-material/Phone";
 
 import "./ProviderDetails.css";
-// import Loader from "../../components/Loader/Loader";
-// import { clearErrors, getProviderDetails } from "../../actions/providerAction";
-import MetaData from "../../components/MetaData";
 
 const ProviderDetails = () => {
   // console.log(user);
