@@ -22,11 +22,6 @@ const RegisterRestScreen = () => {
   // console.log(user._id);
 
   const { details } = useSelector((state) => state.providerDetails);
-  // const { newLoading, success, errorTiffin } = useSelector(
-  //   (state) => state.newTiffin
-  // );
-
-  // const [tiffinProvider, setTiffinProvider] = useState({});
 
   useEffect(() => {
     if (isAuthenticated) {

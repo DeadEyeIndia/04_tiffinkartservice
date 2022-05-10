@@ -44,7 +44,7 @@ const LoginScreen = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title="LOGIN -- Tiffin Kart" />
+          <MetaData title="LOGIN | Tiffin Kart" />
           <div className="app__login">
             <div className="app__loginBackgroundImage" />
             <div className="app__loginInner">

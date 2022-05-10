@@ -30,33 +30,35 @@ form {
   margin-top: 30px;
 }
 
-form > div {
-  width: 300px;
+form > .app__registerInput {
+  width: 350px;
   height: 40px;
   margin-bottom: 20px;
   border: 1px solid #808080;
   border-radius: 35px;
 }
 
-form > div:last-child {
+form > .app__registerInput:last-child {
   margin-bottom: 0;
 }
 
 .app__registerInput {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 form > div > input {
   width: 100%;
   height: 40px;
   padding: 0 15px;
-  border: 0;
 }
 
 .app__signInCreate {
   width: 100%;
   margin-top: 30px;
+  border: none;
 }
 
 .app__signInInstead {
@@ -82,7 +84,7 @@ form > div > input {
     width: 35%;
   }
 
-  form > input {
+  form > div > input {
     width: 350px;
   }
 }
@@ -92,7 +94,7 @@ form > div > input {
     width: 40%;
   }
 
-  form > input {
+  form > div > input {
     width: 350px;
   }
 }
@@ -102,7 +104,7 @@ form > div > input {
     width: 43%;
   }
 
-  form > input {
+  form > div > input {
     width: 350px;
   }
 }
@@ -112,7 +114,7 @@ form > div > input {
     width: 55%;
   }
 
-  form > input {
+  form > div > input {
     width: 330px;
   }
 }
@@ -136,8 +138,9 @@ form > div > input {
     margin-top: 40px;
   }
 
-  form > input {
+  form > div > input {
     width: 400px;
+    height: 100%;
     margin-top: 10px;
   }
 }

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import Loader from "../../components/Loader/Loader";
-import Header from "../../components/Header/Header";
-import MetaData from "../../components/MetaData";
+import Loader from "../Loader/Loader";
+import Header from "../Header/Header";
+import MetaData from "../MetaData";
 
 const User = () => {
   const navigate = useNavigate();
@@ -23,8 +23,6 @@ const User = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title={`${user.name} Profile`} />
-          <Header />
           <div className="app__userContainer">
             <div>
               <h1>My Account</h1>

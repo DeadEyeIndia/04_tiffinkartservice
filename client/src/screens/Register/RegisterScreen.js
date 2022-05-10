@@ -56,7 +56,7 @@ const RegisterScreen = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title="Register User" />
+          <MetaData title="Register User | Tiffin Kart" />
           <div className="app__createRegister f-c-c">
             <div className="app__createRegisterInner f-c-c">
               <h1>Tiffin Kart</h1>
@@ -65,10 +65,10 @@ const RegisterScreen = () => {
                 className="app__registerForm f-c-c"
                 onSubmit={handleRegisterSubmit}
               >
-                <div className="app__registerInput">
+                <div className="app__registerInput ">
                   <input
                     type="text"
-                    placeholder="Name .."
+                    placeholder="Name ..."
                     name="name"
                     value={newUser.registerName}
                     onChange={(e) =>
@@ -76,7 +76,7 @@ const RegisterScreen = () => {
                     }
                   />
                 </div>
-                <div className="app__registerInput">
+                <div className="app__registerInput ">
                   <input
                     type="email"
                     placeholder="Email"

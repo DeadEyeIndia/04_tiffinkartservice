@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -9,6 +9,9 @@ import "./Dashboard.css";
 import MetaData from "../../components/MetaData";
 import Loader from "../../components/Loader/Loader";
 import LoginScreen from "../Login/LoginScreen";
+import User from "../../components/User/User";
+import ProviderDetails from "../../components/Provider/ProviderDetails";
+import Reviews from "../../components/Reviews/Reviews";
 import { logout } from "../../actions/userAction";
 import { getProviderDetails } from "../../actions/providerAction";
 
@@ -32,11 +35,11 @@ const Dashboard = () => {
     if (!isAuthenticated) {
       navigate("/");
     }
-    navigate("/dashboard");
+    navigate("/dashboard/account");
     if (isAuthenticated) {
       dispatch(getProviderDetails(user._id));
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, dispatch]);
 
   return (
     <>
@@ -46,7 +49,7 @@ const Dashboard = () => {
         <LoginScreen />
       ) : (
         <>
-          <MetaData title="Dashboard" />
+          <MetaData title="Dashboard | TIffin Kart" />
           <div className="app__dashboard">
             <div className="app__dashboardNav">
               <div className="app__dashboardOverview">
@@ -103,14 +106,12 @@ const Dashboard = () => {
             <main className="app__dashboardMain">
               <div className="app__dashboardMain-header">
                 <h1>Welcome, {user.name}!</h1>
-
-                <select>
-                  <option value="Profile Settings" selected>
-                    Profile Settings
-                  </option>
-                  <option value="Provider Details">Provider Details</option>
-                  <option value="Reviews">Reviews</option>
-                </select>
+                <div className="app__dashboardMain_navLink">
+                  <Link to="/dashboard/account">Profile Settings</Link>
+                  <Link to="/dashboard/provider/details">Provider Details</Link>
+                  <Link to="/dashboard/reviews">Feedback</Link>
+                </div>
+                <Outlet />
               </div>
             </main>
           </div>
