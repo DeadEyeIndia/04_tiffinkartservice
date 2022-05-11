@@ -15,7 +15,7 @@
 }
 
 .app__userContainer-inputInner {
-  width: 22%;
+  width: 300px;
   height: 40px;
   margin-top: 5px;
 }
@@ -39,7 +39,7 @@
 }
 
 .app__userContainer-submit {
-  width: 14%;
+  width: 170px;
   height: 30px;
   margin-top: 10px;
   font-size: 15px;
@@ -53,5 +53,72 @@
 }
 
 .app__userContainer-submit:hover {
-  background-color: rgb(255, 120, 86);
+  background-color: rgb(253, 109, 72);
+}
+
+.app__userContainer-passHeader {
+  margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--font-color-title);
+}
+
+.app__userContainer-label {
+  color: #a0a0a0;
+  margin-bottom: 5px;
+}
+
+.app__userContainer-newInput {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.app__userContainer-inputPass {
+  margin-bottom: 20px;
+}
+
+.app__userContainer-newPass {
+  margin-right: 80px;
+}
+
+.app__userContainer-inputPass,
+.app__userContainer-newPass,
+.app__userContainer-confirmPass {
+  display: flex;
+  flex-direction: column;
+}
+
+.app__userContainer-inputPass > input,
+.app__userContainer-newPass > input,
+.app__userContainer-confirmPass > input {
+  width: 300px;
+  height: 40px;
+  padding: 0 10px;
+  border: none;
+  border: solid 1px #a0a0a0;
+  border-radius: 25px;
+  transition: all 0.3s;
+}
+
+.app__userContainer-inputPass > input:focus,
+.app__userContainer-newPass > input:focus,
+.app__userContainer-confirmPass > input:focus {
+  border: solid 1px orangered;
+}
+
+.app__userContainer-updatePass {
+  width: 180px;
+  height: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(243, 124, 94);
+  color: #fff;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.app__userContainer-updatePass:hover {
+  background-color: rgb(253, 109, 72);
 }

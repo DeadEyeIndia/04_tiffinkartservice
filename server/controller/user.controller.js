@@ -77,7 +77,7 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
   const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
 
   if (!isPasswordMatch) {
-    return next(new ErrorHandler("old password is invalid", 400));
+    return next(new ErrorHandler("Old password is invalid", 400));
   }
 
   if (req.body.newPassword !== req.body.confirmPassword) {

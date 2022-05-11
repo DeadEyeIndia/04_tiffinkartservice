@@ -21,9 +21,15 @@ const ProviderDetails = () => {
 
   return (
     <>
-      <div className="app__providerDetails">
-        <h2>{details.provider?.nameRest}</h2>
-      </div>
+      {details.success === true && details.provider !== null ? (
+        <div className="app__providerDetails">
+          <h2>{details.provider?.nameRest}</h2>
+        </div>
+      ) : (
+        <>
+          <h1>You have not add your Tiffin services</h1>
+        </>
+      )}
     </>
   );
 };

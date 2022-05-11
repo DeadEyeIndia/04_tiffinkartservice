@@ -5,7 +5,12 @@ import { useAlert } from "react-alert";
 
 import "./User.css";
 import Loader from "../Loader/Loader";
-import { clearErrors, updateProfile, loadUser } from "../../actions/userAction";
+import {
+  clearErrors,
+  updateProfile,
+  loadUser,
+  updatePassword,
+} from "../../actions/userAction";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -21,10 +26,22 @@ const User = () => {
     email: "",
   });
 
+  const [password, setPassword] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
   const updateProfileSubmit = (e) => {
     e.preventDefault();
 
     dispatch(updateProfile(updateUser));
+  };
+
+  const updatePasswordSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(updatePassword(password));
   };
 
   useEffect(() => {
@@ -44,6 +61,7 @@ const User = () => {
       navigate("/dashboard/account");
 
       dispatch({ type: "UPDATE_PROFILE_RESET" });
+      dispatch({ type: "UPDATE_PASSWORD_RESET" });
     }
   }, [dispatch, alert, navigate, user, isUpdated]);
 
@@ -84,6 +102,60 @@ const User = () => {
                 type="submit"
                 value="Update Changes"
                 className="app__userContainer-submit"
+              />
+            </form>
+
+            <form onSubmit={updatePasswordSubmit}>
+              <h2 className="app__userContainer-passHeader">Change Password</h2>
+              <div className="app__userContainer-inputPass">
+                <label className="app__userContainer-label">Old Password</label>
+                <input
+                  type="password"
+                  value={password.oldPassword}
+                  onChange={(e) =>
+                    setPassword({
+                      ...password,
+                      oldPassword: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="app__userContainer-newInput">
+                <div className="app__userContainer-newPass">
+                  <label className="app__userContainer-label">
+                    New Password
+                  </label>
+                  <input
+                    type="password"
+                    value={password.newPassword}
+                    onChange={(e) =>
+                      setPassword({
+                        ...password,
+                        newPassword: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="app__userContainer-confirmPass">
+                  <label className="app__userContainer-label">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    value={password.confirmPassword}
+                    onChange={(e) =>
+                      setPassword({
+                        ...password,
+                        confirmPassword: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              <input
+                type="submit"
+                value="Change Password"
+                className="app__userContainer-updatePass"
               />
             </form>
           </div>

@@ -12,15 +12,9 @@ const RegisterScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error, loading, isAuthenticated, token } = useSelector(
+  const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
-  // const cookies = new Cookies();
-  // cookies.set("token", token, {
-  //   expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-  //   httpOnly: true,
-  //   path: "/",
-  // });
 
   const [newUser, setNewUser] = useState({
     registerName: "",

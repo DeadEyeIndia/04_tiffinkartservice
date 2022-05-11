@@ -89,10 +89,34 @@ export const updateProfile = (userData) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: "UPDATE_PROFILE_SUCCESS", payload: data });
+    dispatch({ type: "UPDATE_PROFILE_SUCCESS", payload: data.success });
   } catch (error) {
     dispatch({
       type: "UPDATE_PROFILE_FAIL",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updatePassword = (passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: "UPDATE_PASSWORD_REQUEST" });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+
+    const { data } = await axios.put(
+      `${url}/change/password`,
+      passwords,
+      config
+    );
+
+    dispatch({ type: "UPDATE_PASSWORD_SUCCESS", payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: "UPDATE_PASSWORD_FAIL",
       payload: error.response.data.message,
     });
   }
