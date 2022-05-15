@@ -1,13 +1,8 @@
 .header {
   height: 90px;
   padding: 0 150px;
-  border-bottom: 1px solid black;
+  background-color: #fff;
 }
-
-/* @media screen and (max-width: 760px) {
-  .header {
-  }
-} */
 
 .header__main {
   height: 100%;
@@ -25,16 +20,20 @@
 
 .app__headerButtons > a {
   text-decoration: none;
-  color: black;
+  width: 110px;
+  height: 40px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
   padding: 10px 10px;
-  border: 1px solid rgb(121, 121, 121);
-  border-radius: 4px;
-  transition: all 0.3s;
+  border: none;
+  background-color: #f37c5e;
+  border-radius: 25px;
+  transition: all 0.5s;
 }
 
 .app__headerButtons > a:hover {
-  color: white;
-  background-color: black;
+  background-color: #fd6d48;
 }
 
 .app__headerSignUp {
@@ -48,17 +47,20 @@
 
 .app__headerDashboard {
   text-decoration: none;
-  color: #000;
-  margin-right: 15px;
+  width: 140px;
+  height: 40px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
   padding: 10px 10px;
-  border: 1px solid #000;
-  border-radius: 4px;
-  transition: all 0.3s;
+  border: none;
+  background-color: #f37c5e;
+  border-radius: 25px;
+  transition: all 0.5s;
 }
 
 .app__headerDashboard:hover {
-  color: #fff;
-  background-color: #000;
+  background-color: #fd6d48;
 }
 
 .app__headerProfile {
@@ -107,4 +109,16 @@
 
 .app__headerToggleShow > div:last-child {
   border-bottom: 0;
+}
+
+@media screen and (max-width: 1100px) {
+  .header {
+    padding: 0 110px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    padding: 0 65px;
+  }
 }

@@ -73,7 +73,11 @@ const User = () => {
         <>
           <div className="app__userContainer">
             <h2>Profile Settings</h2>
-            <form encType="multipart/form-data" onSubmit={updateProfileSubmit}>
+            <form
+              encType="multipart/form-data"
+              onSubmit={updateProfileSubmit}
+              className="app__userContainer-profileChange"
+            >
               <div className="app__userContainer-input">
                 <label>Full Name</label>
                 <div className="app__userContainer-inputInner">
@@ -105,7 +109,10 @@ const User = () => {
               />
             </form>
 
-            <form onSubmit={updatePasswordSubmit}>
+            <form
+              onSubmit={updatePasswordSubmit}
+              className="app__userContainer-passwordChange"
+            >
               <h2 className="app__userContainer-passHeader">Change Password</h2>
               <div className="app__userContainer-inputPass">
                 <label className="app__userContainer-label">Old Password</label>

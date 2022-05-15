@@ -1,13 +1,119 @@
 .app__registerProvider {
-  width: 100vw;
   height: 100vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-form {
+.app__registerProvider-sideImage {
+  flex: 0.5;
+
+  background-image: url("../../images/image_processing20200813-2456-1tdpkkl.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.app__registerProvider-sideRegister {
+  flex: 0.5 0 0;
+  width: 100%;
+  height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.137);
+}
+
+.app__registerProvider-sideRegister > h1 {
+  color: var(--font-color-title);
+  font-size: 45px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.app__registerProvider-sideRegister > h4 {
+  color: var(--font-color-title);
+  font-size: 30px;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.app__registerProvider-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 30px;
+}
+
+.app__registerProvider-form > select {
+  width: 300px;
+  height: 40px;
+  border: 1px solid var(--select-border);
+  border-radius: 20px;
+  padding: 0 15px;
+  font-size: 14px;
+  color: #797979;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+
+input.app__registerProvider-registerInput {
+  width: 300px;
+  height: 40px;
+  padding: 0 15px;
+  border: none;
+  border: solid 1px #808080;
+  border-radius: 50px;
+  background: transparent;
+}
+
+.app__allCheckBoxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.app__chechBox > label {
+  margin-left: 5px;
+  color: black;
+}
+
+.app__registerProvider-form > button {
+  height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 0;
+  border-radius: 25px;
+  background-color: rgb(243, 124, 94);
+  color: #fff;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.app__registerProvider-form > button:hover {
+  background-color: rgb(253, 109, 72);
+}
+
+@media screen and (max-width: 1150px) {
+  .app__registerProvider-sideImage {
+    display: none;
+  }
+
+  .app__registerProvider-sideRegister {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .app__registerProvider {
+    height: 100%;
+  }
+
+  .app__registerProvider-sideRegister > h1 {
+    margin-top: 40px;
+  }
+
+  .app__registerProvider-form {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

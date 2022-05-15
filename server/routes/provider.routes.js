@@ -13,19 +13,28 @@ const {
   // registerProvider,
   registerTiffinService,
   getTiffinServiceDetails,
+  getSingleProvider,
   updateTiffinServiceDetails,
   getAllTiffinServices,
   getAllTiffinForAdmin,
   getSingleTiffinForAdmin,
   updateTiffinForAdmin,
   deleteTiffinProviderForAdmin,
+  createProviderReview,
+  allReviews,
 } = require("../controller/provider.controller");
 
 // Provider Route API's
 
-router.route("/user/tiffin/register").post(registerTiffinService);
+router
+  .route("/provider/register")
+  .post(isAuthenticatedUser, registerTiffinService);
+
+router.route("/providers").get(getAllTiffinServices);
 
 router.route("/user/restaurant/:user").get(getTiffinServiceDetails);
+
+router.route("/provider/:id").get(getSingleProvider);
 
 router
   .route("/user/restaurant/update")
@@ -35,7 +44,9 @@ router
     updateTiffinServiceDetails
   );
 
-router.route("/user/all/tiffin-services").get(getAllTiffinServices);
+router.route("/review").put(isAuthenticatedUser, createProviderReview);
+
+router.route("/allreviews").get(allReviews);
 
 // ADMIN -- routes
 router

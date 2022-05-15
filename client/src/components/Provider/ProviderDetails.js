@@ -1,33 +1,88 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import EditIcon from "@mui/icons-material/Edit";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 
-import "./ProviderDetails.css";
+import "./Providers.css";
+import Slider from "./Slider";
+import { clearErrors } from "../../actions/providerAction";
 
 const ProviderDetails = () => {
   // console.log(user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { isAuthenticated } = useSelector((state) => state.user);
-  const { error, success, details } = useSelector(
-    (state) => state.providerDetails
-  );
+  const { error, details } = useSelector((state) => state.providerDetails);
 
   useEffect(() => {
-    if (isAuthenticated && success) {
-      navigate("/provider/details");
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
     }
-  }, [navigate, isAuthenticated, success]);
+
+    if (isAuthenticated && details.success) {
+      navigate("/dashboard/me/details");
+    }
+  }, [navigate, isAuthenticated, details.success, dispatch]);
 
   return (
     <>
       {details.success === true && details.provider !== null ? (
         <div className="app__providerDetails">
-          <h2>{details.provider?.nameRest}</h2>
+          <div className="app__providerDetails-header">
+            <h1>{details.provider?.nameRest}</h1>
+            {/* <button>
+              <EditIcon style={{ fontSize: "18px" }} />
+              Edit
+            </button> */}
+          </div>
+
+          <div className="app__providerDetails-imageSlides">
+            <Slider slides={details.provider?.images} />
+          </div>
+
+          <p>
+            Address: {details.provider?.restLocality}
+            {", "} {details.provider?.addressRest}
+          </p>
+
+          <p>Phone: {details.provider?.contactNumber}</p>
+
+          <p>
+            City: {details.provider?.city}
+            {", "}
+            {details.provider?.state}
+          </p>
+
+          <p>Tiffin type: {details.provider?.tiffinType}</p>
+
+          <p>Category: {details.provider?.category}</p>
+
+          <p>Service: {details.provider?.service}</p>
+
+          <p>
+            One day price:
+            <CurrencyRupeeIcon style={{ fontSize: "18px" }} />
+            {details.provider?.singleprice}
+          </p>
+
+          <p>
+            A week price: <CurrencyRupeeIcon style={{ fontSize: "18px" }} />
+            {details.provider?.weeklyprice}
+          </p>
+
+          <p>
+            A month price: <CurrencyRupeeIcon style={{ fontSize: "18px" }} />
+            {details.provider?.monthlyprice}
+          </p>
         </div>
       ) : (
         <>
-          <h1>You have not add your Tiffin services</h1>
+          <h2 className="app__registerHeader">
+            You have not add your Tiffin services
+          </h2>
         </>
       )}
     </>

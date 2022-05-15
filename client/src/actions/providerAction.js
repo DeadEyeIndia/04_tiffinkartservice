@@ -2,17 +2,28 @@ import axios from "axios";
 
 import { url } from "../api/index";
 
-export const getProviders = () => async (dispatch) => {
-  try {
-    dispatch({ type: "PROVIDER_REQUEST" });
+export const getProviders =
+  (keyword = "", address = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: "ALL_PROVIDER_REQUEST" });
 
-    const { data } = await axios.get(`${url}/user/all/tiffin-services`);
+      let link = `${url}/providers?keyword=${keyword}`;
 
-    dispatch({ type: "PROVIDER_SUCCESS", payload: data.providers });
-  } catch (error) {
-    dispatch({ type: "PROVIDER_FAIL", payload: error.response.data.message });
-  }
-};
+      if (address) {
+        link = `${url}/providers?keyword=${keyword}&address=${address}`;
+      }
+
+      const { data } = await axios.get(link);
+
+      dispatch({ type: "ALL_PROVIDER_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "ALL_PROVIDER_FAIL",
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 export const createProvider = (productData) => async (dispatch) => {
   try {
@@ -24,7 +35,7 @@ export const createProvider = (productData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${url}/user/tiffin/register`,
+      `${url}/provider/register`,
       productData,
       config
     );
@@ -52,6 +63,63 @@ export const getProviderDetails = (user) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "PROVIDER_DETAILS_FAIL",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const singleProvider = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "SINGLE_PROVIDER_REQUEST" });
+
+    const config = { withCredentials: true };
+
+    const { data } = await axios.get(`${url}/provider/${id}`, config);
+
+    dispatch({ type: "SINGLE_PROVIDER_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "SINGLE_PROVIDER_FAIL",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const newReview = (reviewData) => async (dispatch) => {
+  try {
+    dispatch({ type: "NEW_REVIEW_REQUEST" });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+
+    const { data } = await axios.put(`${url}/review`, reviewData, config);
+
+    dispatch({ type: "NEW_REVIEW_SUCCESS", payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: "NEW_REVIEW_FAIL",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getAllReviews = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "ALL_REVIEW_REQUEST" });
+
+    const config = { withCredentials: true };
+
+    const { data } = await axios.get(`${url}/allreviews?id=${id}`, config);
+
+    dispatch({
+      type: "ALL_REVIEW_SUCCESS",
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: "ALL_REVIEW_FAIL",
       payload: error.response.data.message,
     });
   }

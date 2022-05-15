@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 import "./RegisterRestScreen.css";
 import LoginScreen from "../Login/LoginScreen";
 import ProviderDetails from "../../components/Provider/ProviderDetails";
 import MetaData from "../../components/MetaData";
-import cuisinesData from "./cuisinesData.json";
 import {
   clearErrors,
   createProvider,
@@ -17,17 +17,11 @@ import Loader from "../../components/Loader/Loader";
 const RegisterRestScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const alert = useAlert();
 
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
-  // console.log(user._id);
 
-  const { details } = useSelector((state) => state.providerDetails);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(getProviderDetails(user._id));
-    }
-  }, [isAuthenticated, dispatch, user._id]);
+  const { details, error } = useSelector((state) => state.providerDetails);
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -40,6 +34,9 @@ const RegisterRestScreen = () => {
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
   const [service, setService] = useState("");
+  const [singleTiffin, setSingleTiffin] = useState("");
+  const [weeklyTiffin, setWeeklyTiffin] = useState("");
+  const [monthlyTiffin, setMonthlyTiffin] = useState("");
 
   const handleTiffinProvider = (e) => {
     e.preventDefault();
@@ -58,12 +55,14 @@ const RegisterRestScreen = () => {
       images: images,
       category: category,
       service: service,
+      singleprice: singleTiffin,
+      weeklyprice: weeklyTiffin,
+      monthlyprice: monthlyTiffin,
       user: user._id,
     };
     console.log(user);
     console.log(newTiffin);
     dispatch(createProvider(newTiffin));
-    navigate("/");
   };
 
   const createTiffinImagesChange = (e) => {
@@ -81,19 +80,24 @@ const RegisterRestScreen = () => {
       };
       reader.readAsDataURL(file);
     });
-
-    console.log(files);
   };
 
-  // useEffect(() => {
-  //   if (errorTiffin) {
-  //     dispatch(clearErrors());
-  //   }
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+      navigate("/register-restaurant");
+    }
 
-  //   if (success) {
-  //     dispatch({ type: "NEW_TIFFIN_RESET" });
-  //   }
-  // }, [dispatch, errorTiffin, success]);
+    if (isAuthenticated) {
+      dispatch(getProviderDetails(user._id));
+    }
+
+    if (details.success) {
+      dispatch({ type: "NEW_TIFFIN_RESET" });
+      navigate("/dashboard/me/details");
+    }
+  }, [dispatch, error, isAuthenticated]);
 
   return (
     <>
@@ -101,108 +105,114 @@ const RegisterRestScreen = () => {
         <Loader />
       ) : !isAuthenticated ? (
         <LoginScreen />
-      ) : details ? (
+      ) : details.provider !== null ? (
         <ProviderDetails />
       ) : (
         <>
           <MetaData title="Register Provider" />
           <div className="app__registerProvider">
-            <h1>Tiffin Kart</h1>
-            <h4>Register your Tiffin Service</h4>
-            <form encType="multipart/form-data" onSubmit={handleTiffinProvider}>
-              <input
-                type="text"
-                placeholder="Tiffin Service Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Tiffin Service Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Tiffin Service Locality"
-                value={locality}
-                onChange={(e) => setLocality(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Mobile Number"
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Enter City"
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Enter state"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-              />
-              <select onChange={(e) => setTiffinType(e.target.value)}>
-                <option value="">Select Tiffin Type</option>
-                <option value="Food Mess">Food Mess</option>
-                <option value="Chef/Cook">Chef/Cook</option>
-                <option value="Food Mess, Chef/Cook">Both</option>
-              </select>
-              <div className="app__allCheckBoxes">
-                {cuisinesData.map((data) => (
-                  <>
-                    <div className="app__chechBox">
-                      <input
-                        type="checkbox"
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setCuisines([
-                              ...cuisines,
-                              {
-                                value: data.value,
-                              },
-                            ]);
-                          } else {
-                            setCuisines(
-                              cuisines.filter(
-                                (cuisine) => cuisine.id !== data.id
-                              )
-                            );
-                          }
-                          console.log(cuisines);
-                        }}
-                        value={data.value}
-                      />
-                      <label>{data.label}</label>
-                    </div>
-                  </>
-                ))}
-              </div>
-              <input
-                type="file"
-                name="providerImage"
-                accept="image/*"
-                onChange={createTiffinImagesChange}
-                multiple
-              />
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Select Category</option>
-                <option value="Vegetarian">Vegetarian</option>
-                <option value="Non-Vegetarian">Non-Vegetarian</option>
-                <option value="Vegetarian, Non-Vegetarian">Both</option>
-              </select>
-              <select onChange={(e) => setService(e.target.value)}>
-                <option value="">Select Service Type</option>
-                <option value="Home Delivery">Home Delivery</option>
-                <option value="At Premises">At Premises</option>
-                <option value="Home Delivery, At Premises">Both</option>
-              </select>
-              <button type="submit">Register</button>
-            </form>
+            <div className="app__registerProvider-sideImage" />
+            <div className="app__registerProvider-sideRegister">
+              <h1>Tiffin Kart</h1>
+              <h4>Register your Tiffin Service</h4>
+              <form
+                encType="multipart/form-data"
+                onSubmit={handleTiffinProvider}
+                className="app__registerProvider-form"
+              >
+                <input
+                  type="text"
+                  placeholder="Tiffin Service Name"
+                  className="app__registerProvider-registerInput"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Tiffin Service Address"
+                  className="app__registerProvider-registerInput"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Tiffin Service Locality"
+                  className="app__registerProvider-registerInput"
+                  value={locality}
+                  onChange={(e) => setLocality(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Mobile Number"
+                  className="app__registerProvider-registerInput"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Enter City"
+                  className="app__registerProvider-registerInput"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="Enter state"
+                  className="app__registerProvider-registerInput"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                />
+                <select onChange={(e) => setTiffinType(e.target.value)}>
+                  <option value="">Select Tiffin Type</option>
+                  <option value="Food Mess">Food Mess</option>
+                  <option value="Chef/Cook">Chef/Cook</option>
+                  <option value="Food Mess, Chef/Cook">Both</option>
+                </select>
+                <div>
+                  <input
+                    type="file"
+                    name="providerImage"
+                    accept="image/*"
+                    onChange={createTiffinImagesChange}
+                    multiple
+                  />
+                </div>
+                <select onChange={(e) => setCategory(e.target.value)}>
+                  <option value="">Select Category</option>
+                  <option value="Vegetarian">Vegetarian</option>
+                  <option value="Non-Vegetarian">Non-Vegetarian</option>
+                  <option value="Vegetarian, Non-Vegetarian">Both</option>
+                </select>
+                <select onChange={(e) => setService(e.target.value)}>
+                  <option value="">Select Service Type</option>
+                  <option value="Home Delivery">Home Delivery</option>
+                  <option value="At Premises">At Premises</option>
+                  <option value="Home Delivery, At Premises">Both</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="One day tiffin price"
+                  className="app__registerProvider-registerInput"
+                  value={singleTiffin}
+                  onChange={(e) => setSingleTiffin(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="A week tiffin price"
+                  className="app__registerProvider-registerInput"
+                  value={weeklyTiffin}
+                  onChange={(e) => setWeeklyTiffin(e.target.value)}
+                />
+                <input
+                  type="text"
+                  placeholder="A month tiffin price"
+                  className="app__registerProvider-registerInput"
+                  value={monthlyTiffin}
+                  onChange={(e) => setMonthlyTiffin(e.target.value)}
+                />
+                <button type="submit">Register</button>
+              </form>
+            </div>
           </div>
         </>
       )}
@@ -211,19 +221,3 @@ const RegisterRestScreen = () => {
 };
 
 export default RegisterRestScreen;
-
-// {
-//   !isAuthenticated ? (
-//     <>
-//       <LoginScreen />
-//     </>
-//   ) : (
-//
-//   );
-// }
-// // if(!isAuthenticated) {<LoginScreen />} else if(details)
-//       {<ProviderDetails />} else
-//       {
-//         <>
-//
-//       }

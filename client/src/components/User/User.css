@@ -1,8 +1,21 @@
+@media screen and (max-width: 800px) {
+  .app__userContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .app__userContainer > h2 {
-  margin-bottom: 20px;
   font-size: 25px;
   font-weight: 500;
   color: var(--font-color-title);
+  margin: 20px 0;
+}
+
+.app__userContainer-profileChange {
+  display: flex;
+  flex-direction: column;
 }
 
 .app__userContainer-input {
@@ -56,7 +69,19 @@
   background-color: rgb(253, 109, 72);
 }
 
+.app__userContainer-passwordChange {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 800px) {
+  .app__userContainer-passwordChange {
+    align-items: center;
+  }
+}
+
 .app__userContainer-passHeader {
+  margin-top: 30px;
   margin-bottom: 20px;
   font-size: 25px;
   font-weight: 500;
@@ -68,13 +93,25 @@
   margin-bottom: 5px;
 }
 
+.app__userContainer-inputPass {
+  margin-bottom: 20px;
+}
+
 .app__userContainer-newInput {
   display: flex;
   margin-bottom: 30px;
 }
 
-.app__userContainer-inputPass {
-  margin-bottom: 20px;
+@media screen and (max-width: 800px) {
+  .app__userContainer-newInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app__userContainer-newPass {
+    margin-bottom: 30px;
+  }
 }
 
 .app__userContainer-newPass {

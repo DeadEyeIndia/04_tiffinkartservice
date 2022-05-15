@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "universal-cookie";
+import { useAlert } from "react-alert";
 
 import "./RegisterScreen.css";
 import Loader from "../../components/Loader/Loader";
@@ -11,8 +11,9 @@ import MetaData from "../../components/MetaData";
 const RegisterScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const alert = useAlert();
 
-  const { error, loading, isAuthenticated } = useSelector(
+  const { error, loading, success, isAuthenticated } = useSelector(
     (state) => state.user
   );
 
@@ -39,6 +40,10 @@ const RegisterScreen = () => {
       dispatch(clearErrors());
     }
 
+    if (success) {
+      alert.success("Registered successfully");
+    }
+
     if (isAuthenticated) {
       navigate("/");
     }
@@ -59,7 +64,7 @@ const RegisterScreen = () => {
                 className="app__registerForm f-c-c"
                 onSubmit={handleRegisterSubmit}
               >
-                <div className="app__registerInput ">
+                <div className="app__registerInput">
                   <input
                     type="text"
                     placeholder="Name ..."
@@ -70,7 +75,7 @@ const RegisterScreen = () => {
                     }
                   />
                 </div>
-                <div className="app__registerInput ">
+                <div className="app__registerInput">
                   <input
                     type="email"
                     placeholder="Email"

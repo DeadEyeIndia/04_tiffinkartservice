@@ -41,12 +41,6 @@ const providerSchema = mongoose.Schema({
     enum: ["Food Mess", "Chef/Cook", "Food Mess, Chef/Cook"],
     required: [true, "Please select Tiffin provider type"],
   },
-  cuisines: [
-    {
-      type: String,
-      required: [true, "Please select at least one cusinies"],
-    },
-  ],
   images: [
     {
       public_id: {
@@ -69,7 +63,27 @@ const providerSchema = mongoose.Schema({
     enum: ["Home Delivery", "At Premises", "Home Delivery, At Premises"],
     required: [true, "Please select service type"],
   },
-  numOfReviews: [
+  singleprice: {
+    type: String,
+    required: [true, "Please enter your single tiffin price"],
+  },
+  weeklyprice: {
+    type: String,
+    required: [true, "Please enter your all week tiffin price"],
+  },
+  monthlyprice: {
+    type: String,
+    required: [true, "Please enter your all month tiffin price"],
+  },
+  ratings: {
+    type: Number,
+    default: 0,
+  },
+  numOfReviews: {
+    type: Number,
+    default: 0,
+  },
+  reviews: [
     {
       user: {
         type: mongoose.Schema.ObjectId,
@@ -81,7 +95,7 @@ const providerSchema = mongoose.Schema({
         required: true,
       },
       rating: {
-        type: String,
+        type: Number,
         required: true,
       },
       comment: {
@@ -95,7 +109,7 @@ const providerSchema = mongoose.Schema({
     default: "provider",
   },
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: true,
   },

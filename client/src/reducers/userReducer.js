@@ -12,6 +12,7 @@ export const userReducer = (state = { user: {} }, action) => {
       return {
         ...state,
         loading: false,
+        success: true,
         isAuthenticated: true,
         user: action.payload,
       };

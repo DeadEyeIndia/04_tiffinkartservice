@@ -1,9 +1,9 @@
-.search {
+.app__search {
   height: 50vh;
   width: 100%;
   position: relative;
 }
-.search__img {
+.app__searchImg {
   height: 100%;
   background-image: url("../../images/tiffin.png");
   background-position: center;
@@ -11,7 +11,7 @@
   background-size: cover;
 }
 
-.search__appTitle {
+.app__searchTitle {
   width: 100%;
   position: absolute;
   flex-direction: column;
@@ -20,41 +20,91 @@
   color: #ffffff;
 }
 
-.search__appTitle > h1 {
+.app__searchTitle > h1 {
   margin-bottom: 40px;
   font-size: 75px;
 }
 
-.search__inputBoxes {
-  width: 35%;
-  height: 50px;
-  border-radius: 5px;
-  background-color: white;
+.app__searchInputBoxes {
+  width: 650px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 0 20px;
+  background-color: #fff;
 }
 
-.search__locationInput > svg {
-  color: black;
-  font-size: 24px;
-  margin-left: 10px;
-}
-
-.search__addressInput > input,
-.search__locationInput > input {
+.app__searchLocationInput {
   height: 100%;
-  margin-left: 6px;
-  font-size: 16px;
 }
 
-.search__locationInput > input::placeholder {
-  color: grey;
-  font-size: 16px;
+.app__searchLocation {
+  color: #f37c5e;
+  margin-right: 10px;
 }
 
-.search__addressInput {
+.app__searchBox {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.app__searchBox > input[type="text"] {
+  width: 180px;
+  font-size: 1rem;
+}
+
+.app__searchBox > input[type="submit"] {
+  display: none;
+}
+
+.app__searchBreak {
+  height: 60%;
+  border: 1px solid #f37c5e;
+  margin-right: 10px;
+}
+
+.app__searchAddress {
+  height: 100%;
   width: 100%;
 }
 
-.search__break {
-  height: 100%;
-  border-left: 1px solid black;
+.app__searchByAddress {
+  display: none;
+}
+
+.app__searchAddress > form > input[type="text"] {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .app__searchTitle {
+    margin-top: 80px;
+  }
+
+  .app__searchInputBoxes {
+    width: 400px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+  }
+
+  .app__searchLocationInput,
+  .app__searchAddress {
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 0 20px;
+  }
+
+  .app__searchBreak {
+    display: none;
+  }
+
+  .app__searchLocationInput {
+    margin-bottom: 20px;
+  }
 }

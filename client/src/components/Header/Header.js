@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import PersonIcon from "@mui/icons-material/Person";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import "./Header.css";
 
-import { logout } from "../../actions/userAction";
-
 const Header = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const { isAuthenticated, user } = useSelector((state) => state.user);
-
-  const [toggleIcon, setToggleIcon] = useState(true);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   return (
     <header className="header">
@@ -24,39 +15,19 @@ const Header = () => {
         </Link>
         {!isAuthenticated ? (
           <div className="app__headerButtons">
-            <Link to="/register" className="app__headerSignUp">
+            <Link to="/register" className="app__headerSignUp f-c-c">
               Register
             </Link>
-            <Link to="/login" className="app__headerSignIn">
+            <Link to="/login" className="app__headerSignIn f-c-c">
               Login
             </Link>
           </div>
         ) : (
           <>
             <div className="app__headerAfter">
-              <Link to="/dashboard" className="app__headerDashboard">
+              <Link to="/dashboard" className="app__headerDashboard f-c-c">
                 Dashboard
               </Link>
-              {/* <div className="app__headerProfile">
-                <PersonIcon
-                  className="app__headerProfileIcon"
-                  style={{ fontSize: 36 }}
-                  onClick={() => setToggleIcon(!toggleIcon)}
-                />
-                <div
-                  className={
-                    toggleIcon
-                      ? "app__headerToggleHide"
-                      : "app__headerToggleShow"
-                  }
-                >
-                  <div className="app__headerUserName">{user.name}</div>
-                  <div className="app__headerVewAccount">View Account</div>
-                  <div className="app__headerLogout" onClick={handleLogout}>
-                    Logout
-                  </div>
-                </div>
-              </div> */}
             </div>
           </>
         )}

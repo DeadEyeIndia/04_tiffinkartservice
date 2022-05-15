@@ -30,7 +30,10 @@ export const newRegister = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: "REGISTER_REQUEST" });
 
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
 
     const { data } = await axios.post(
       `${url}/register`,
@@ -38,7 +41,7 @@ export const newRegister = (name, email, password) => async (dispatch) => {
       config
     );
 
-    dispatch({ type: "LOGIN_SUCCESS", payload: data });
+    dispatch({ type: "LOGIN_SUCCESS", payload: data.user });
   } catch (error) {
     dispatch({ type: "LOGIN_FAIL", payload: error.response.data.message });
   }
