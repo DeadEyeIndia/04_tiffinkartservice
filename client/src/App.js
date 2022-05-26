@@ -10,6 +10,7 @@ import RegisterRestScreen from "./screens/RegisterRestaurant/RegisterRestScreen"
 import ProviderDetails from "./components/Provider/ProviderDetails";
 import User from "./components/User/User";
 import SingleProvider from "./components/Provider/SingleProvider";
+import EditProvider from "./components/Provider/EditProvider";
 
 import { loadUser } from "./actions/userAction";
 import { store } from "./app/store";
@@ -30,6 +31,7 @@ function App() {
             <Route index path="account" element={<User />} />
             <Route path="me/details" element={<ProviderDetails />} />
             <Route path="reviews" element={<Reviews />} />
+            <Route path="edit" element={<EditProvider />} />
           </Route>
           <Route path="login" element={<LoginScreen />} />
           <Route path="register" element={<RegisterScreen />} />

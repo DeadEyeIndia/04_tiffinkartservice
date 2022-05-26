@@ -12,7 +12,7 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
-  const { error, loading, isAuthenticated, success } = useSelector(
+  const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
 
@@ -33,14 +33,10 @@ const LoginScreen = () => {
       dispatch(clearErrors());
     }
 
-    if (success) {
-      alert.success("Logged in");
-    }
-
     if (isAuthenticated) {
       navigate("/");
     }
-  }, [dispatch, isAuthenticated, navigate]);
+  }, [dispatch, isAuthenticated, navigate, error]);
 
   return (
     <>

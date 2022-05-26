@@ -11,7 +11,7 @@ const Header = () => {
     <header className="header">
       <div className="header__main f-sb-c">
         <Link to="/" className="app__headerTitle">
-          Tiffin Kart Icon
+          <h2>Tiffin Kart</h2>
         </Link>
         {!isAuthenticated ? (
           <div className="app__headerButtons">

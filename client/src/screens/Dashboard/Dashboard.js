@@ -32,11 +32,17 @@ const Dashboard = () => {
     navigate("/");
   };
 
+  const handleRegsiterPage = () => {
+    navigate("/register-restaurant");
+  };
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/");
     }
+
     navigate("/dashboard/account");
+
     if (isAuthenticated) {
       dispatch(getProviderDetails(user._id));
     }
@@ -107,7 +113,7 @@ const Dashboard = () => {
                       <>
                         <div className="app__dashboardOverview-review">
                           <span>Total Reviews</span>
-                          <span>{details.provider?.numOfReviews.length}</span>
+                          <span>{details.provider?.numOfReviews}</span>
                         </div>
                         <p className="app__dashboardOverview-provider">
                           Provider's image
@@ -123,12 +129,12 @@ const Dashboard = () => {
                         <div className="app__dashboardNoUser">
                           <span>
                             If you want to add your tiffin service{" "}
-                            <Link
-                              to="/register-restaurant"
+                            <div
+                              onClick={handleRegsiterPage}
                               className="app__dashboardLink"
                             >
                               Click here!
-                            </Link>
+                            </div>
                           </span>
                         </div>
                       </>

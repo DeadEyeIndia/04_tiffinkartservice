@@ -178,3 +178,51 @@ export const providerReviewsReducer = (state = { reviews: [] }, action) => {
       return state;
   }
 };
+
+export const providerReducerStatus = (state = {}, action) => {
+  switch (action.type) {
+    case "DELETE_PROVIDER_REQUEST":
+    case "UPDATE_PROVIDER_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "DELETE_PROVIDER_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      };
+
+    case "UPDATE_PROVIDER_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+    case "DELETE_PROVIDER_FAIL":
+    case "UPDATE_PROVIDER_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case "DELETE_PROVIDER_RESET":
+      return {
+        ...state,
+        isDeleted: false,
+      };
+    case "UPDATE_PROVIDER_RESET":
+      return {
+        ...state,
+        isUpdated: false,
+      };
+    case "CLEAR_ERRORS":
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};

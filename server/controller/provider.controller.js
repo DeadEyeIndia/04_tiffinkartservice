@@ -51,7 +51,7 @@ exports.getAllTiffinServices = catchAsyncError(async (req, res, next) => {
 
   let providers = await apiFeatures.query;
 
-  let filterProviderCount = providers.length;
+  // let filterProviderCount = providers.length;
 
   res.status(200).send({
     success: true,
@@ -91,9 +91,11 @@ exports.getSingleProvider = catchAsyncError(async (req, res, next) => {
 
 // Update User Provider Details
 exports.updateTiffinServiceDetails = catchAsyncError(async (req, res, next) => {
-  req.body.user = req.user.id;
+  let providerFind = await Provider.findById(req.params.id);
 
-  const providerFind = Provider.findOne({ user: req.body.user });
+  if (!providerFind) {
+    return next(new ErrorHandler("Provider not found", 404));
+  }
 
   let images = [];
 
@@ -124,17 +126,13 @@ exports.updateTiffinServiceDetails = catchAsyncError(async (req, res, next) => {
     req.body.images = imagesLinks;
   }
 
-  const provider = await Provider.findOneAndUpdate(
-    { user: req.user.id },
-    req.body,
-    {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    }
-  );
+  const provider = await Provider.findOneAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
 
-  res.status(200).send({
+  res.status(201).send({
     success: true,
     provider,
   });

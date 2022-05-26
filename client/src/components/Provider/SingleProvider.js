@@ -98,7 +98,7 @@ const SingleProvider = () => {
                   <p>Service: {details.provider?.service}</p>
 
                   <p>
-                    One day price:
+                    One tiffin price:
                     <CurrencyRupeeIcon style={{ fontSize: "18px" }} />
                     {details.provider?.singleprice}
                   </p>

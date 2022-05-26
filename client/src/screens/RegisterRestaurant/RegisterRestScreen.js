@@ -60,9 +60,13 @@ const RegisterRestScreen = () => {
       monthlyprice: monthlyTiffin,
       user: user._id,
     };
-    console.log(user);
-    console.log(newTiffin);
+    // console.log(user);
+    // console.log(newTiffin);
     dispatch(createProvider(newTiffin));
+    if (details.success === true) {
+      dispatch({ type: "NEW_PROVDER_RESET" });
+      navigate("/dashboard/me/details");
+    }
   };
 
   const createTiffinImagesChange = (e) => {
@@ -93,10 +97,10 @@ const RegisterRestScreen = () => {
       dispatch(getProviderDetails(user._id));
     }
 
-    if (details.success) {
-      dispatch({ type: "NEW_TIFFIN_RESET" });
-      navigate("/dashboard/me/details");
-    }
+    // if (details.success === true) {
+    //   dispatch({ type: "NEW_PROVDER_RESET" });
+    //   // navigate("/dashboard/me/details");
+    // }
   }, [dispatch, error, isAuthenticated]);
 
   return (

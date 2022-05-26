@@ -7,6 +7,7 @@ import {
   newReviewReducer,
   providerReviewsReducer,
   getSingleProvider,
+  providerReducerStatus,
 } from "../reducers/providerReducer";
 import { userReducer, profileReducer } from "../reducers/userReducer";
 
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   newReview: newReviewReducer,
   providerreview: providerReviewsReducer,
   singleprovider: getSingleProvider,
+  updateProvider: providerReducerStatus,
 });
 
 export const store = configureStore({

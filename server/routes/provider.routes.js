@@ -37,10 +37,10 @@ router.route("/user/restaurant/:user").get(getTiffinServiceDetails);
 router.route("/provider/:id").get(getSingleProvider);
 
 router
-  .route("/user/restaurant/update")
+  .route("/provider/update/:id")
   .put(
     isAuthenticatedUser,
-    isRestProvider("provider"),
+    isAuthorizedRole("user"),
     updateTiffinServiceDetails
   );
 
@@ -62,7 +62,7 @@ router
   .put(isAuthenticatedUser, isAuthorizedRole("admin"), updateTiffinForAdmin);
 
 router
-  .route("/admin/delete/provider/:id")
+  .route("/provider/delete/:id")
   .delete(
     isAuthenticatedUser,
     isAuthorizedRole("admin"),

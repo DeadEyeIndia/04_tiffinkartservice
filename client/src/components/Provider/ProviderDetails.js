@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-// import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate, Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 
 import "./Providers.css";
@@ -9,6 +9,10 @@ import Slider from "./Slider";
 import { clearErrors } from "../../actions/providerAction";
 
 const ProviderDetails = () => {
+  const editScreen = () => {
+    navigate("/dashboard/edit");
+  };
+
   // console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,10 +37,10 @@ const ProviderDetails = () => {
         <div className="app__providerDetails">
           <div className="app__providerDetails-header">
             <h1>{details.provider?.nameRest}</h1>
-            {/* <button>
+            {/* <Link to="/dashboard/edit">
               <EditIcon style={{ fontSize: "18px" }} />
               Edit
-            </button> */}
+            </Link> */}
           </div>
 
           <div className="app__providerDetails-imageSlides">
@@ -63,7 +67,7 @@ const ProviderDetails = () => {
           <p>Service: {details.provider?.service}</p>
 
           <p>
-            One day price:
+            One tiffin price:
             <CurrencyRupeeIcon style={{ fontSize: "18px" }} />
             {details.provider?.singleprice}
           </p>
